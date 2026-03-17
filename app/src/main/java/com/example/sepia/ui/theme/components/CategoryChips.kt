@@ -37,17 +37,17 @@ fun CategoryChips(
                 },
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = SepiaColors.Primary,
-                    selectedLabelColor = Color.White,
-                    containerColor = SepiaColors.ChipUnselected,
-                    labelColor = SepiaColors.Primary
+                    selectedLabelColor     = Color.White,
+                    containerColor         = SepiaColors.ChipUnselected,
+                    labelColor             = SepiaColors.Primary
                 ),
                 shape = RoundedCornerShape(20.dp),
                 border = FilterChipDefaults.filterChipBorder(
-                    enabled = true,
-                    selected = isSelected,
-                    borderColor = SepiaColors.Primary,
+                    enabled             = true,
+                    selected            = isSelected,
+                    borderColor         = SepiaColors.Primary,
                     selectedBorderColor = SepiaColors.Primary,
-                    borderWidth = 1.dp,
+                    borderWidth         = 1.dp,
                     selectedBorderWidth = 1.5.dp
                 )
             )

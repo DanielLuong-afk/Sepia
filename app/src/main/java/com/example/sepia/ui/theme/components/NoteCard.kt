@@ -36,7 +36,6 @@ fun NoteCard(note: Note) {
             .padding(12.dp),
         contentAlignment = Alignment.BottomStart
     ) {
-        // Category tag
         Surface(
             shape = RoundedCornerShape(8.dp),
             color = SepiaColors.Primary
