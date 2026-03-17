@@ -1,20 +1,25 @@
-package com.example.sepia.ui.theme
+package com.example.sepia.views
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.sepia.data.Note
+import com.example.sepia.ui.theme.SepiaColors
 import com.example.sepia.ui.theme.components.CategoryChips
 import com.example.sepia.ui.theme.components.NoteCard
 import com.example.sepia.ui.theme.components.SearchBar
+import com.example.sepia.ui.theme.components.SepiaTopBar
 import com.example.sepia.viewmodel.NotesViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesGalleryScreen(viewModel: NotesViewModel, paddingValues: PaddingValues) {
     var selectedCategory by remember { mutableStateOf(viewModel.selectedCategory) }
@@ -25,33 +30,36 @@ fun NotesGalleryScreen(viewModel: NotesViewModel, paddingValues: PaddingValues) 
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(text = "Sepia") },
-                actions = {
-                    IconButton(onClick = { /* Settings */ }) { /* Icon */ }
-                }
-            )
+            SepiaTopBar(title = "Sepia")
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* Add new note */ }) { /* Icon */ }
+            FloatingActionButton(
+                onClick = { /* Add new note */ },
+                containerColor = SepiaColors.Primary,
+                contentColor = androidx.compose.ui.graphics.Color.White,
+                shape = CircleShape
+            ) {
+                Icon(Icons.Filled.Add, contentDescription = "Add note")
+            }
         },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { paddingValues ->
+        containerColor = SepiaColors.ScreenBackground
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
+                .background(SepiaColors.ScreenBackground)
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             SearchBar(modifier = Modifier.fillMaxWidth())
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             CategoryChips(
                 categories = listOf("All", "Math101", "Physics", "Work"),
                 selectedCategory = selectedCategory,
                 onCategorySelected = { selectedCategory = it }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             val filteredNotes = viewModel.getFilteredNotes()
             NotesGrid(notes = filteredNotes)
@@ -63,7 +71,9 @@ fun NotesGalleryScreen(viewModel: NotesViewModel, paddingValues: PaddingValues) 
 fun NotesGrid(notes: List<Note>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(bottom = 80.dp)
+        contentPadding = PaddingValues(bottom = 80.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(notes) { note ->
             NoteCard(note = note)
