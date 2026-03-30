@@ -22,6 +22,7 @@ import com.example.sepia.navigation.AppNavGraph
 import com.example.sepia.navigation.Routes
 import com.example.sepia.ui.theme.SepiaTheme
 import com.example.sepia.viewmodel.NotesViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 private data class BottomNavItem(
     val route: String,
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val viewModel: NotesViewModel = remember { NotesViewModel() }
+    val viewModel: NotesViewModel = viewModel()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
