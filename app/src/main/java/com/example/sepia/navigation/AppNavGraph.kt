@@ -30,7 +30,7 @@ fun AppNavGraph(
             SettingsScreen()
         }
         composable(Routes.CAMERA){
-            CameraScreen()
+            CameraScreen(viewModel, innerPadding)
         }
     }
 }
